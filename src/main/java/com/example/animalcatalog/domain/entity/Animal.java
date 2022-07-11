@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Entity
-@Table(name = "animals")
+@Table(name = "animal")
 public class Animal extends BaseEntity{
     String animalType;
     String name;

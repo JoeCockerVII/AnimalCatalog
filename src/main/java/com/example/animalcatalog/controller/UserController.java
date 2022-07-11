@@ -16,7 +16,7 @@ import java.util.UUID;
  * Controller to work with User Entity
  * @author ilyin
  * @since 07.07.2022
- * path = http://localhost:8080/api/v1.0/users
+ * path = http://localhost:8081/api/v1.0/users
  */
 
 @RestController
@@ -36,19 +36,6 @@ public class UserController {
     }
 
     /**
-     * Add new user
-     * @return UserDto on JSON format
-     */
-    @PostMapping
-    public UserDto create(@RequestBody UserCreateDto createDto) {
-        return Optional.ofNullable(createDto)
-                .map(userMapper::fromCreateDto)
-                .map(userService::create)
-                .map(userMapper::toDto)
-                .orElseThrow();
-    }
-
-    /**
      * Update user by id
      * @return UserDto on JSON format
      */
@@ -63,11 +50,19 @@ public class UserController {
 
     /**
      * Delete user by id
-     * @param id of user
      */
     @DeleteMapping("/{userId}")
     public void delete(@PathVariable(name = "userId") UUID id) {
         userService.delete(id);
+    }
+
+    /**
+     * Testing string
+     * @return String
+     */
+    @GetMapping("/hello")
+    public String hello(){
+        return "Hello";
     }
 
 }
