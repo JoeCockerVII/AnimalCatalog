@@ -29,8 +29,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class AnimalServiceImpl implements AnimalService {
 
-    final List<String> animalTypes = Arrays.asList("Dog","Cat","Cow","Pig");
-
     private final AnimalMapper animalMapper;
     private final AnimalRepository animalRepository;
     private final UserService userService;
@@ -66,8 +64,15 @@ public class AnimalServiceImpl implements AnimalService {
         animalRepository.deleteById(id);
     }
 
+    @Override
     @Transactional
     public Page<Animal> getUserAnimals(UUID userId, Pageable pageable) {
         return animalRepository.findAnimalByUserId(userId, pageable);
+    }
+
+    @Override
+    @Transactional
+    public boolean existsByAnimalName(String name){
+        return animalRepository.existsByName(name);
     }
 }

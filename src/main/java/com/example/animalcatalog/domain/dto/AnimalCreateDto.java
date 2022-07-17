@@ -1,5 +1,7 @@
 package com.example.animalcatalog.domain.dto;
 
+import com.example.animalcatalog.validation.AnimalNameUnique;
+import com.example.animalcatalog.validation.AnimalType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;
@@ -17,7 +19,9 @@ import static lombok.AccessLevel.PRIVATE;
 @Jacksonized
 @AllArgsConstructor(access = PRIVATE)
 public class AnimalCreateDto {
+    @AnimalType
     String animalType;
+    @AnimalNameUnique
     String name;
     String gender;
     String dayOfBirth;

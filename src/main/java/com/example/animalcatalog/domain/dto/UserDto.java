@@ -1,6 +1,7 @@
 package com.example.animalcatalog.domain.dto;
 
 import com.example.animalcatalog.domain.entity.Role;
+import com.example.animalcatalog.validation.UserNameUnique;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;

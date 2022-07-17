@@ -9,6 +9,7 @@ import com.example.animalcatalog.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -33,6 +34,20 @@ public class UserController {
                 .map(userService::get)
                 .map(userMapper::toDto)
                 .orElseThrow(() -> new EntityNotFoundException(id, "User"));
+    }
+
+
+    /**
+     * Add new user
+     * @return UserDto on JSON format
+     */
+    @PostMapping
+    public UserDto create(@Valid @RequestBody UserCreateDto createDto) {
+        return Optional.ofNullable(createDto)
+                .map(userMapper::fromCreateDto)
+                .map(userService::create)
+                .map(userMapper::toDto)
+                .orElseThrow();
     }
 
     /**

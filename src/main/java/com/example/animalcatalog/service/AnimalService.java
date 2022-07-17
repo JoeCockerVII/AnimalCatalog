@@ -42,4 +42,10 @@ public interface AnimalService {
      */
     Page<Animal> getUserAnimals(UUID userId, Pageable pageable);
 
+    /**
+     * Animal existion check by animalName
+     * @return animal existion mark
+     */
+    boolean existsByAnimalName(String name);
+
 }

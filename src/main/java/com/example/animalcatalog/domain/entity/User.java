@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static javax.persistence.CascadeType.*;
@@ -25,6 +26,10 @@ import static lombok.AccessLevel.PRIVATE;
 public class User extends BaseEntity{
     private String userName;
     private String password;
+
+    private boolean accountNonLocked = true;
+    private int attemptCount;
+    private Date lockTime;
 
     @Enumerated(STRING)
     private Role role = Role.USER;

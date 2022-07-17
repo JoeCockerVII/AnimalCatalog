@@ -1,6 +1,7 @@
 package com.example.animalcatalog.service;
 
 import com.example.animalcatalog.domain.entity.User;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -34,5 +35,11 @@ public interface UserService {
      * Delete user by id
      */
     void delete(UUID id);
+
+    /**
+     * User existion check by userName
+     * @return user existion mark
+     */
+    boolean existsByUserName(String userName);
 
 }

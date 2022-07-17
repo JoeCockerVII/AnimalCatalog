@@ -1,6 +1,6 @@
 package com.example.animalcatalog.security;
 
-import com.example.animalcatalog.domain.dto.UserDto;
+import com.example.animalcatalog.domain.entity.User;
 import com.example.animalcatalog.domain.mapper.UserMapper;
 import com.example.animalcatalog.repository.UserRepository;
 import com.example.animalcatalog.service.TokenService;
@@ -43,16 +43,19 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         if (token != null && securityContext.getAuthentication() == null) {
             String username = tokenService.extractUsernameAndValidate(token);
 
-            UserDto user = userRepository.findByUserName(username)
-                    .map(userMapper::toDto)
-                    .orElseThrow();
+            User user = userRepository.findByUserName(username).orElseThrow();
 
-            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                    new UsernamePasswordAuthenticationToken(
-                            user,
-                            null,
-                            List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name())));
-            securityContext.setAuthentication(usernamePasswordAuthenticationToken);
+            // Если условие !Unlocked
+            if(user.isAccountNonLocked()) {
+                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                        new UsernamePasswordAuthenticationToken(
+                                user,
+                                null,
+                                List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name())));
+                securityContext.setAuthentication(usernamePasswordAuthenticationToken);
+            }
+            else
+                securityContext.setAuthentication(null);
         }
         filterChain.doFilter(request, response);
     }

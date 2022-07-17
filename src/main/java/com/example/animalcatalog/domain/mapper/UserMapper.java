@@ -9,6 +9,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
+import java.util.Date;
+
 import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 
 /**
@@ -23,17 +25,22 @@ public interface UserMapper {
     @Mapping(target = "animals", ignore = true)
     @Mapping(target = "password", ignore = true)
     @Mapping(target = "role", ignore = true)
+    @Mapping(target = "attemptCount", ignore = true)
+    @Mapping(target = "accountNonLocked", ignore = true)
+    @Mapping(target = "lockTime", ignore = true)
     User fromCreateDto(UserCreateDto source);
 
     //@Mapping(target = "id", ignore = true)
     @Mapping(target = "animals", ignore = true)
     @Mapping(target = "password", ignore = true)
     @Mapping(target = "role", ignore = true)
+    @Mapping(target = "attemptCount", ignore = true)
+    @Mapping(target = "accountNonLocked", ignore = true)
+    @Mapping(target = "lockTime", ignore = true)
     User fromUpdateDto(UserUpdateDto source);
 
     UserDto toDto(User source);
 
     @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)
     User merge(@MappingTarget User target, User source);
-
 }

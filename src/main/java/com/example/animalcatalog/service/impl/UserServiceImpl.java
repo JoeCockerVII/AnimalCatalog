@@ -55,4 +55,10 @@ public class UserServiceImpl implements UserService {
     public void delete(UUID id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    @Transactional
+    public boolean existsByUserName(String userName){
+        return userRepository.existsByUserName(userName);
+    }
 }

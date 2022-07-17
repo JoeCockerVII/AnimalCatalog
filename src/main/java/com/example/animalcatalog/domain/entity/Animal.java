@@ -1,5 +1,6 @@
 package com.example.animalcatalog.domain.entity;
 
+import com.example.animalcatalog.validation.AnimalType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "animal")
 public class Animal extends BaseEntity{
+
     String animalType;
     String name;
     String gender;
